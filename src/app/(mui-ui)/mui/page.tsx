@@ -1,4 +1,4 @@
-import { MuiView } from "@/views";
+import { MuiView } from "@/layout";
 
 export default function pageMui() {
   return <MuiView />
