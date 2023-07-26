@@ -1,7 +1,5 @@
-import React from 'react'
+import { MuiView } from "@/views";
 
 export default function pageMui() {
-  return (
-    <div>pageMui</div>
-  )
+  return <MuiView />
 }
