@@ -16,35 +16,32 @@ export default function RHFTextField({
   const { control } = useFormContext();
 
   return (
-    <div>
-      <Controller
-        name={name}
-        control={control}
-        render={({ field, fieldState: {error} }) => {
-          return (
-            <TextField
-              {...field}
-              fullWidth
-              type={type}
-              value={type === "number" && field.value === 0 ? "" : field.value}
-              onChange={(event) => {
-                if (type === "number") {
-                  field.onChange(Number(event.target.value));
-                } else {
-                  field.onChange(event.target.value);
-                }
-              }}
-              {...other}
-              error={!!error}
-              helperText={error ? error.message : helperText}
-            />
-          );
-        }}
-      />
-    </div>
+    <Controller
+      name={name}
+      control={control}
+      render={({ field, fieldState: { error } }) => {
+        return (
+          <TextField
+            {...field}
+            fullWidth
+            type={type}
+            value={type === "number" && field.value === 0 ? "" : field.value}
+            onChange={(event) => {
+              if (type === "number") {
+                field.onChange(Number(event.target.value));
+              } else {
+                field.onChange(event.target.value);
+              }
+            }}
+            {...other}
+            error={!!error}
+            helperText={error ? error.message : helperText}
+          />
+        );
+      }}
+    />
   );
 }
-
 
 // tai lieu
 // https://react-hook-form.com/docs/usecontroller

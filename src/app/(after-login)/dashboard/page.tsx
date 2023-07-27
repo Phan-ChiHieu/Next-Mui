@@ -1,7 +1,6 @@
-import React from 'react'
+import OverviewDashboardView from "@/sections/dashboard/view/overview-dashboard-view";
+import React from "react";
 
 export default function pageDashboard() {
-  return (
-    <div>pageDashboard</div>
-  )
+  return <OverviewDashboardView />;
 }

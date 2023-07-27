@@ -30,9 +30,7 @@ type Payload = {
   [Types.REGISTER]: {
     user: AuthUserType;
   };
-  [Types.LOGOUT]: {
-    user: AuthUserType;
-  };
+  [Types.LOGOUT]: undefined;
 };
 
 const initialState: AuthStateType = {
@@ -119,6 +117,12 @@ export default function AuthProvider({ children }: TProviderProps) {
       email,
       password,
     };
+
+    // formData
+    // const formData = new FormData();
+    // formData.append("email", email);
+    // formData.append("password", password);
+
     const response = await axios.post(endpoints.auth.login, data);
 
     const { accessToken, user } = response.data;
@@ -132,12 +136,29 @@ export default function AuthProvider({ children }: TProviderProps) {
     });
   }, []);
 
+  // LOGOUT
+  const logout = useCallback(async () => {
+    setSession(null);
+    dispatch({
+      type: Types.LOGOUT,
+    });
+  }, []);
+
+  // neu state.user co ton tai thi return authenticated
+  const checkAuthenticated = state.user ? "authenticated" : "unauthenticated";
+
+  const status = state.loading ? "loading" : checkAuthenticated;
+
   const memoizedValue = useMemo(
     () => ({
       user: state.user,
-      login
+      method: "jwt",
+      loading: status === "loading",
+      authenticated: status === "authenticated",
+      login,
+      logout,
     }),
-    [login, state.user]
+    [login, logout, state.user, status]
   );
 
   return (

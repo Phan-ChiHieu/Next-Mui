@@ -3,8 +3,10 @@
 import React, { useMemo } from 'react'
 import merge from 'lodash/merge';
 import { palette } from './palette';
-import { CssBaseline, ThemeOptions, createTheme, ThemeProvider as MuiThemeProvider } from '@mui/material';
+import { createTheme, ThemeProvider as MuiThemeProvider, ThemeOptions } from '@mui/material/styles';
 import NextAppDirEmotionCacheProvider from './next-emotion-cache';
+import { componentsOverrides } from './overrides';
+import CssBaseline from '@mui/material/CssBaseline';
 
 
 type Props = {
@@ -31,13 +33,21 @@ export default function ThemeProvider({ children }: Props) {
 
   const theme = createTheme(memoizedValue as ThemeOptions);
 
+  // componentsOverrides ghi de css global
+  theme.components = merge(componentsOverrides(theme));
+
+  const themeWithLocale = useMemo(
+    () => createTheme(theme),
+    [theme]
+  );
+
 
   return (
     <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
+      <MuiThemeProvider theme={themeWithLocale}>
       {/*--start:  Global reset */}
       <CssBaseline />
       {/*--end:  Global reset */}
-      <MuiThemeProvider theme={theme}>
         {children}
       </MuiThemeProvider>
     </NextAppDirEmotionCacheProvider>
