@@ -31,6 +31,7 @@
     "typescript": "5.1.6",
     "@hookform/resolvers": "^3.1.1",
     "yup": "^1.2.0",
-    "@mui/lab": "^5.0.0-alpha.136"
+    "@mui/lab": "^5.0.0-alpha.136",
+    "framer-motion": "^10.12.21"
   }
 }
