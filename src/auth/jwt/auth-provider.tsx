@@ -132,12 +132,21 @@ export default function AuthProvider({ children }: TProviderProps) {
     });
   }, []);
 
+
+  // neu state.user co ton tai thi return authenticated
+  const checkAuthenticated = state.user ? 'authenticated' : 'unauthenticated';
+
+  const status = state.loading ? 'loading' : checkAuthenticated;
+
   const memoizedValue = useMemo(
     () => ({
       user: state.user,
-      login
+      method: 'jwt',
+      login,
+      loading: status === 'loading',
+      authenticated: status === "authenticated"
     }),
-    [login, state.user]
+    [login, state.user, status]
   );
 
   return (

@@ -6,7 +6,13 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import FormProvider from "@/components/hook-form";
 import RHFTextField from "@/components/hook-form/rhf-text-field";
-import { IconButton, InputAdornment } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  InputAdornment,
+  Stack,
+  Typography,
+} from "@mui/material";
 import Iconify from "@/components/inconify";
 import { useBoolean } from "@/hooks/use-boolean";
 import { useAuthContext } from "@/auth/hooks";
@@ -53,37 +59,55 @@ export default function JwtLoginView() {
   });
 
   return (
-    <FormProvider methods={methods} _onSubmit={onSubmit}>
-      <h1>JwtLoginView</h1>
-      <RHFTextField name="email" label="Email address" />
-      <RHFTextField
-        name="password"
-        label="Password"
-        type="password"
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={password.onToggle} edge="end">
-                <Iconify
-                  icon={
-                    password.value ? "solar:eye-bold" : "solar:eye-closed-bold"
-                  }
-                />
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-      <LoadingButton
-        fullWidth
-        color="inherit"
-        size="large"
-        type="submit"
-        variant="contained"
-        loading={isSubmitting}
-      >
-        Login
-      </LoadingButton>
-    </FormProvider>
+    <Box
+      sx={{
+        width: "520px",
+        marginX: "auto",
+      }}
+    >
+      <FormProvider methods={methods} _onSubmit={onSubmit}>
+        <Typography
+          variant="h3"
+          sx={{
+            paddingBottom: "20px",
+          }}
+        >
+          JwtLoginView
+        </Typography>
+        <Stack spacing={2.5}>
+          <RHFTextField name="email" label="Email address" />
+          <RHFTextField
+            name="password"
+            label="Password"
+            type={password.value ? "text" : "password"}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={password.onToggle} edge="end">
+                    <Iconify
+                      icon={
+                        password.value
+                          ? "solar:eye-bold"
+                          : "solar:eye-closed-bold"
+                      }
+                    />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <LoadingButton
+            fullWidth
+            color="inherit"
+            size="large"
+            type="submit"
+            variant="contained"
+            loading={isSubmitting}
+          >
+            Login
+          </LoadingButton>
+        </Stack>
+      </FormProvider>
+    </Box>
   );
 }
