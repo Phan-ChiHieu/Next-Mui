@@ -24,7 +24,8 @@ export default function AuthGuard({ children }: TAuthGuardProps) {
         const searchParams = new URLSearchParams({
           returnTo: window.location.pathname,
         }).toString();
-  
+        console.log("window", searchParams)
+
         const loginPath = loginPaths[method];
   
         const href = `${loginPath}?${searchParams}`;

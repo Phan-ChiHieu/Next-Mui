@@ -2,11 +2,12 @@
 
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import FormProvider from "@/components/hook-form";
 import RHFTextField from "@/components/hook-form/rhf-text-field";
 import {
+  Alert,
   Box,
   IconButton,
   InputAdornment,
@@ -36,6 +37,7 @@ export default function JwtLoginView() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const returnTo = searchParams.get("returnTo");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const { login } = useAuthContext();
   const password = useBoolean();
@@ -55,7 +57,11 @@ export default function JwtLoginView() {
       // viet function login
       await login(data.email, data.password);
       router.push(returnTo || PATH_AFTER_LOGIN);
-    } catch (error) {}
+    } catch (error: any) {
+      console.log("error", error);
+      reset();
+      setErrorMsg(typeof error === "string" ? error : error.message);
+    }
   });
 
   return (
@@ -75,6 +81,8 @@ export default function JwtLoginView() {
           JwtLoginView
         </Typography>
         <Stack spacing={2.5}>
+          {!!errorMsg && <Alert severity="error">{errorMsg}</Alert>}
+
           <RHFTextField name="email" label="Email address" />
           <RHFTextField
             name="password"

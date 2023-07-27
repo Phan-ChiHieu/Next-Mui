@@ -1,5 +1,5 @@
-import { MuiView } from "@/layout";
+import MuiView from "@/sections/mui";
 
 export default function pageMui() {
-  return <MuiView />
+  return <MuiView />;
 }
