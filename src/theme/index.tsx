@@ -25,13 +25,13 @@ export default function ThemeProvider({ children }: Props) {
     []
   );
 
-  const memoizedValue = useMemo(() =>
-    merge({
-      baseOption
-    }), [baseOption]
-  )
+  // const memoizedValue = useMemo(() =>
+  //   merge({
+  //     baseOption
+  //   }), [baseOption]
+  // )
 
-  const theme = createTheme(memoizedValue as ThemeOptions);
+  const theme = createTheme(baseOption as ThemeOptions);
 
   // componentsOverrides ghi de css global
   theme.components = merge(componentsOverrides(theme));
