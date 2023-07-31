@@ -44,7 +44,7 @@ export default function ThemeProvider({ children }: Props) {
 
   return (
     <NextAppDirEmotionCacheProvider options={{ key: 'css' }}>
-      <MuiThemeProvider theme={themeWithLocale}>
+      <MuiThemeProvider theme={theme}>
       {/*--start:  Global reset */}
       <CssBaseline />
       {/*--end:  Global reset */}

@@ -71,6 +71,14 @@ export default function Header() {
           >
             logo
           </Badge>
+          <Box
+            sx={{
+              color: theme.palette.ebook.text.secondary,
+              // color: theme.palette.primary.text.disabled,
+            }}
+          >
+            Chi hieu
+          </Box>
         </Container>
       </Toolbar>
     </AppBar>
